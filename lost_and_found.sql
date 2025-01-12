@@ -90,8 +90,7 @@ DELIMITER ;
 
 -- Example Data (optional)
 INSERT INTO users (name, email, password, role) VALUES 
-('John Doe', 'john@example.com', 'password123', 'user'),
-('Jane Smith', 'jane@example.com', 'password456', 'user');
+('Aditya Gupta', adityagupta.d7@example.com', 'password123', 'user'),
 
 INSERT INTO items (name, description, location, status, image, created_by) VALUES
 ('Lost Wallet', 'A brown leather wallet lost near the park.', 'City Park', 'lost', 'wallet.jpg', 1),
