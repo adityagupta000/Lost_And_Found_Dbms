@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="form-card">
+        <div class="card-content">
+            <h2 class="form-title">Register a Lost or Found Item</h2>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <form method="POST" enctype="multipart/form-data">
+                <div class="status-group mb-4">
+                    <div class="btn-group w-100" role="group">
+                        <input type="radio" class="btn-check" name="status" id="lost" value="lost" checked>
+                        <label class="btn btn-outline-danger" for="lost">
+                            <i class="fas fa-search me-2"></i>Lost Item
+                        </label>
+                        
+                        <input type="radio" class="btn-check" name="status" id="found" value="found">
+                        <label class="btn btn-outline-success" for="found">
+                            <i class="fas fa-hand-holding me-2"></i>Found Item
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Item Name" required>
+                    <label for="name">Item Name</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <textarea id="description" name="description" class="form-control" placeholder="Item Description" required></textarea>
+                    <label for="description">Detailed Description</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" id="location" name="location" class="form-control" placeholder="Location" required>
+                    <label for="location">Location Found/Lost</label>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold mb-2">Item Photo</label>
+                    <input type="file" name="image" accept="image/*" class="form-control" id="imageInput" required>
+                    <div id="imagePreview" class="mt-2 text-center d-none">
+                        <img src="" alt="Preview" class="preview-image">
+                    </div>
+                    <small class="text-muted d-block mt-2">Upload a clear image of the item</small>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-outline-primary">
+                        <i class="fas fa-plus-circle me-2"></i>Register Item
+                    </button>
+                    <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+.content-wrapper {
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-card {
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.card-content {
+    padding: 2.5rem;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.btn-group {
+    gap: 0.5rem;
+}
+
+.preview-image {
+    max-height: 200px;
+    border-radius: 0.5rem;
+    object-fit: contain;
+}
+
+.form-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.btn {
+    padding: 0.8rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+@media (min-width: 768px) {
+    .content-wrapper {
+        padding: 3rem;
+    }
+    
+    .card-content {
+        padding: 3rem;
+    }
+
+    .form-buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 580px) {
+    .card-content {
+        padding: 1.5rem;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+    
+    .btn-group > .btn {
+        width: 100%;
+        border-radius: 0.375rem !important;
+    }
+}
+</style>
+
+<script>
+document.getElementById('imageInput').addEventListener('change', function(e) {
+    const preview = document.getElementById('imagePreview');
+    const img = preview.querySelector('img');
+    
+    if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            img.src = e.target.result;
+            preview.classList.remove('d-none');
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    } else {
+        preview.classList.add('d-none');
+    }
+});
+</script>
+{% endblock %}

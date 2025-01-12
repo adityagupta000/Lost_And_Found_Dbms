@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div
+      class="alert alert-success text-center"
+      style="max-width: 600px; width: 100%; margin: 20px auto; border-radius: 10px; background-color: #28a745; color: white;"
+      id="flash-message">
+      {% for category, message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+    <script>
+      setTimeout(function() {
+        const message = document.getElementById("flash-message");
+        if (message) {
+          message.style.display = 'none';
+        }
+      }, 2000);
+    </script>
+  {% endif %}
+{% endwith %}
+
+<div class="d-flex justify-content-center align-items-center bg-gradient" style="min-height: 100vh;">
+  <div class="col-lg-5 col-md-7 col-sm-10 col-12">
+    <div class="card card-login shadow-lg">
+      <div class="card-header text-center text-white bg-gradient-primary rounded-top">
+        <h2 class="mb-0 fw-bold">Welcome Back</h2>
+      </div>
+      <div class="card-body p-5">
+        <p class="text-center text-muted mb-4">Login to your account</p>
+
+        <form method="POST" id="loginForm">
+          <!-- Email Input -->
+          <div class="form-floating mb-4">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+              aria-label="Email Address"
+              required
+              class="form-control form-control-lg"
+              style="background-color: #f9f9f9;"
+            />
+            <label for="email" class="text-muted">Email Address</label>
+          </div>
+
+          <!-- Password Input -->
+          <div class="form-floating mb-4">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              aria-label="Password"
+              required
+              class="form-control form-control-lg"
+              style="background-color:rgb(255, 255, 255);"
+            />
+            <label for="password" class="text-muted">Password</label>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="d-grid">
+            <button
+              type="submit"
+              class="btn btn-gradient btn-lg"
+              aria-label="Login Button"
+              id="loginButton"
+              style="display: none;"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+
+        <p class="text-center mt-4 text-muted">
+          Don't have an account? 
+          <a href="/register" class="text-decoration-none fw-bold" style="color: #007bff;">Register here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Background Gradient */
+  .bg-gradient {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  }
+
+  /* Card Header Gradient */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    padding: 20px 0;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .card {
+    background-color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 45px 90px rgba(0, 0, 0, 0.2);
+  }
+
+  .form-floating > label {
+    font-size: 14px;
+    color:rgb(0, 0, 0);
+  }
+
+  .form-floating .form-control {
+    padding: 15px;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease;
+  }
+
+  .form-floating .form-control:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+    background-color: #ffffff;
+  }
+
+  .btn-gradient {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gradient:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    transform: translateY(-2px);
+  }
+
+  /* Typography */
+  h2 {
+    font-weight: 700;
+    color: white;
+  }
+
+  p {
+    line-height: 1.5;
+  }
+
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .form-floating > label {
+      font-size: 13px;
+    }
+
+    .btn-gradient {
+      padding: 0.6rem 1.2rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .btn-gradient {
+      padding: 0.5rem 1rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const loginButton = document.getElementById('loginButton');
+
+    function checkInputs() {
+      const emailValue = emailInput.value.trim();
+      const passwordValue = passwordInput.value.trim();
+      
+      // Show button only if both fields have values
+      if (emailValue && passwordValue) {
+        loginButton.style.display = 'block';
+      } else {
+        loginButton.style.display = 'none';
+      }
+    }
+
+    // Add event listeners for both input fields
+    emailInput.addEventListener('input', checkInputs);
+    passwordInput.addEventListener('input', checkInputs);
+  });
+</script>
+
+{% endblock %}

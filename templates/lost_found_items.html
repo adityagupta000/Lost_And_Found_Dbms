@@ -1,0 +1,501 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+
+    :root {
+        --primary: #000000;
+        --secondary: #ffffff;
+        --gray-100: #f8f9fa;
+        --gray-200: #e9ecef;
+        --gray-300: #dee2e6;
+        --gray-400: #ced4da;
+        --gray-600:rgb(0, 0, 0);
+        --border-radius: 2px;
+        --transition: all 0.3s ease;
+    }
+    
+    /* Global Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: var(--gray-100);
+    }
+    
+    /* Header Styles */
+    .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--primary);
+    }
+    
+    /* Search Form Styles */
+    .search-section {
+        padding: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border:1px solid black;
+        max-width: 900px;
+        margin: 0 auto;
+        background: var(--secondary);
+        padding: 0.3rem;
+        border-radius: var(--border-radius);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    }
+    
+    .search-row {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .search-input-wrapper {
+        flex: 1;
+        border:1px solid black;
+        border-radius:7px;
+        min-width: 0;
+    }
+    
+    .search-input {
+        width: 100%;
+        padding: 15px;
+    }
+    
+    .status-select {
+        width: 200px;
+        border:1px solid black;
+    }
+    
+    .search-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        min-width: 48px;
+        background-color: var(--primary);
+        color: var(--secondary);
+        border-radius: var(--border-radius);
+        border: none;
+        transition: var(--transition);
+    }
+    
+    .search-button:hover {
+        background-color: #333;
+    }
+    
+    .card {
+        border: 1px solid gray;
+        border-radius:var(--border-radius);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;    
+        overflow: hidden;
+        background-color: var(--secondary);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin: 0 auto;         
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card-image-wrapper {
+        position: relative;
+        width: 100%;
+        padding-top: 80%;
+        background: var(--gray-100);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .card-img-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+    
+
+    
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        flex: 1;
+        padding: 1.75rem;
+        background: linear-gradient(180deg, rgba(248,249,250,0) 0%, rgba(248,249,250,0.5) 100%);
+    }
+    
+    .card-title {
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin: 0;
+        color: var(--primary);
+        text-align: center;
+        line-height: 1.3;
+    }
+    
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 1rem;
+        border-radius: var(--border-radius);
+    }
+    
+    .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        color:red;
+    }
+    
+    .info-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--gray-600);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .info-value {
+        font-size: 0.95rem;
+        color:rgb(130, 0, 0);
+        word-break: break-word;
+        line-height: 1.1;
+    }
+    
+    .badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.6rem 1.2rem;
+        border-radius: 5px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 1;
+        letter-spacing: 0.5px;
+    }
+    
+    .bg-success {
+        background-color: #28a745 !important;
+    }
+    
+    .bg-danger {
+        background-color: #dc3545 !important;
+    }
+    
+    .btn {
+        padding: 0.75rem 1rem;
+        border-radius: var(--border-radius);
+        transition: var(--transition);
+        font-weight: 500;
+    }
+    
+    .btn-primary {
+        background-color: var(--primary);
+        border: none;
+        color: var(--secondary);
+    }
+    
+    .btn-primary:hover {
+        background-color: #333;
+    }
+    
+    .btn-outline-secondary {
+        border: 1px solid var(--gray-300);
+        color: var(--gray-600);
+    }
+    
+    .card .btn {
+        padding: 0.85rem 1.25rem;
+        border-radius: var(--border-radius);
+        transition: var(--transition);
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+    }
+    
+    .card .btn-primary:hover {
+        transform: translateY(-2px);
+    }
+    
+    .card .btn-outline-secondary {
+        border: 2px solid var(--gray-300);
+    }
+    
+    .card .btn-outline-secondary:hover {
+        transform: translateY(-2px);
+    }
+    
+    .alert {
+        border-radius: var(--border-radius);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+    }
+    
+    .alert-secondary {
+        background-color: var(--gray-100);
+        border: 1px solid var(--gray-200);
+        color: var(--gray-600);
+        text-align: center;
+    }
+    
+    .card .alert {
+        margin: 0;
+        padding: 1rem;
+        border-radius: var(--border-radius);
+        background-color: var(--gray-100);
+        border: 1px solid var(--gray-200);
+        text-align: center;
+        font-weight: 500;
+    }
+    
+    /* Modal Styles */
+    .modal-content {
+        border-radius: var(--border-radius);
+        border: none;
+    }
+    
+    .modal-header {
+        border-bottom: 1px solid var(--gray-200);
+        padding: 1.5rem;
+    }
+    
+    .modal-body {
+        padding: 1.5rem;
+    }
+    
+    @media (min-width: 768px) {
+        .search-form {
+            flex-direction: row;
+            align-items: stretch;
+        }
+    
+        .search-row {
+            flex: 1;
+        }
+    
+        .search-button {
+            min-width: 120px;
+        }
+
+    }
+    
+    @media (min-width: 992px) {
+        .search-section {
+            padding: 2rem;
+        }
+    
+        .row-cols-md-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+</style>
+
+<div class="container-fluid">
+    <h2 class="text-center page-title">Lost and Found Items</h2>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="alert alert-success fade show" role="alert" id="flashMessage">
+        {% for category, message in messages %}
+        <p class="mb-0">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Search Form -->
+    <div class="search-section">
+        <form method="GET" class="search-form">
+            <div class="search-row">
+                <div class="search-input-wrapper">
+                    <input 
+                        type="text" 
+                        name="search" 
+                        class="form-control search-input"
+                        placeholder="Search by name, description, or location..."
+                        value="{{ search_query }}"/>
+                </div>
+                <select name="status" class="form-select status-select d-none d-md-block">
+                    <option value="">All Status</option>
+                    <option value="lost" {% if status_filter == 'lost' %}selected{% endif %}>Lost</option>
+                    <option value="found" {% if status_filter == 'found' %}selected{% endif %}>Found</option>
+                    <option value="claimed" {% if status_filter == 'claimed' %}selected{% endif %}>Claimed</option>
+                </select>
+                <button type="submit" class="btn btn-primary search-button">
+                    <i class="fas fa-search"></i>
+                    <span class="d-none d-sm-inline">Search</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Items Grid -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
+        {% for item in items %}
+        <div class="col">
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <img src="{{ url_for('static', filename=item.image) }}" 
+                         alt="{{ item.name }}" 
+                         class="card-img-top">
+                         <span class="badge bg-{% if item.status == 'found' %}success{% elif item.status == 'claimed' %}primary{% else %}danger{% endif %}">
+                            {{ item.status | upper }}
+                        </span>                        
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Description</span>
+                            <span class="info-value">{{ item.description }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">{{ item.location }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Posted by</span>
+                            <span class="info-value">{{ item.creator_name }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Posted on</span>
+                            <span class="info-value">{{ item.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                        </div>
+                    </div>
+
+                    {% if item.status != 'claimed' and item.created_by != session.user_id %}
+                    <div class="mt-auto d-flex gap-2">
+                        {% if item.status == 'found' %}
+                        <button onclick="openClaimModal('{{ item.id }}', '{{ item.name }}')"
+                                class="btn btn-primary flex-grow-1">
+                            Claim Item
+                        </button>
+                        {% endif %}
+                        <button 
+                            onclick="openMessageModal('{{ item.id }}', '{{ item.name }}', '{{ item.created_by }}')"
+                            class="btn flex-grow-1"
+                            style="border-color: black; color: black;">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                    </div>
+                    {% elif item.status == 'claimed' %}
+                    <div class="alert alert-black mt-auto mb-0" style="border-color: black; color: black;">
+                        This item has been claimed
+                    </div>
+                    {% elif item.created_by == session.user_id %}
+                    <div class="alert alert-black mt-auto mb-0" style="border-color: black; color: black;">
+                        You posted this item
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Claim Modal -->
+    <div class="modal fade" id="claimModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Claim Item: <span id="itemName"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="claimForm">
+                        <input type="hidden" name="item_id" id="itemId">
+                        <p class="text-muted mb-3">
+                            Your registered name and email will be used for this claim.
+                        </p>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Confirm Claim</button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Send Message About: <span id="messageItemName"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ url_for('send_message') }}">
+                        <input type="hidden" name="item_id" id="messageItemId">
+                        <input type="hidden" name="receiver_id" id="messageReceiverId">
+                        <div class="mb-3">
+                            <label class="form-label">Message</label>
+                            <textarea name="message" class="form-control" rows="4" required
+                                    placeholder="Type your message here..."></textarea>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function openClaimModal(itemId, itemName) {
+        document.getElementById('itemId').value = itemId;
+        document.getElementById('itemName').textContent = itemName;
+        document.getElementById('claimForm').action = `/claim_item/${itemId}`;
+        new bootstrap.Modal(document.getElementById('claimModal')).show();
+    }
+
+    function openMessageModal(itemId, itemName, receiverId) {
+        document.getElementById('messageItemId').value = itemId;
+        document.getElementById('messageItemName').textContent = itemName;
+        document.getElementById('messageReceiverId').value = receiverId;
+        new bootstrap.Modal(document.getElementById('messageModal')).show();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const flashMessage = document.getElementById('flashMessage');
+        if (flashMessage) {
+            setTimeout(function() {
+                flashMessage.classList.remove('show');
+                setTimeout(() => flashMessage.remove(), 150);
+            }, 3000);
+        }
+    });
+</script>
+{% endblock %}

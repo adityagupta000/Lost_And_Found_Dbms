@@ -1,0 +1,198 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %} 
+{% if messages %}
+<div class="alert alert-success text-center" style="max-width: 500px; width: 100%; margin: 20px auto; border-radius: 10px; background-color: #28a745; color: white;" id="flash-message">
+  {% for category, message in messages %}
+  <p>{{ message }}</p>
+  {% endfor %}
+</div>
+<script>
+  setTimeout(function() {
+    const message = document.getElementById("flash-message");
+    if (message) {
+      message.style.display = 'none';
+    }
+  }, 2000);
+</script>
+{% endif %} 
+{% endwith %}
+
+<div class="d-flex justify-content-center align-items-center bg-gradient" style="min-height: 100vh;">
+  <div class="col-lg-4 col-md-6 col-sm-9 col-11">
+    <div class="card card-register shadow-lg">
+      <div class="card-header text-center text-white bg-gradient-primary rounded-top">
+        <h2 class="mb-0 fs-4 fw-bold">Create Account</h2>
+      </div>
+      <div class="card-body p-4">
+        <p class="text-center text-muted mb-3 small">Register your new account</p>
+
+        <form method="POST" id="registrationForm">
+          <!-- Name Input -->
+          <div class="form-floating mb-3">
+            <input type="text" id="name" name="name" class="form-control" placeholder="Name" required style="background-color: #f9f9f9;" />
+            <label for="name" class="text-muted">Full Name</label>
+          </div>
+
+          <!-- Email Input -->
+          <div class="form-floating mb-3">
+            <input type="email" id="email" name="email" class="form-control" placeholder="Email" required style="background-color: #f9f9f9;" />
+            <label for="email" class="text-muted">Email Address</label>
+          </div>
+
+          <!-- Password Input -->
+          <div class="form-floating mb-3">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required style="background-color: #f9f9f9;" />
+            <label for="password" class="text-muted">Password</label>
+          </div>
+
+          <!-- Confirm Password Input -->
+          <div class="form-floating mb-3">
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" required style="background-color: #f9f9f9;" />
+            <label for="confirm_password" class="text-muted">Confirm Password</label>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-gradient" id="registerButton" style="display: none;">Register</button>
+          </div>
+        </form>
+
+        <p class="text-center mt-3 mb-0 text-muted small">
+          Already have an account?
+          <a href="/login" class="text-decoration-none fw-bold" style="color: #007bff;">Login here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Background Gradient */
+  .bg-gradient {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  }
+
+  /* Card Header Gradient */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    padding: 15px 0;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .card {
+    background-color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .form-floating > label {
+    font-size: 13px;
+    color: rgb(0, 0, 0);
+  }
+
+  .form-floating .form-control {
+    padding: 12px;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease;
+    height: calc(3rem + 2px);
+    line-height: 1.25;
+  }
+
+  .form-floating .form-control:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+    background-color: #ffffff;
+  }
+
+  .btn-gradient {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gradient:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    transform: translateY(-2px);
+  }
+
+  /* Typography */
+  .small {
+    font-size: 0.875rem;
+  }
+
+  /* Media Queries */
+  @media (max-width: 868px) {
+    .card-body {
+      padding: 2rem !important;
+    }
+
+    .form-floating > label {
+      font-size: 13px;
+    }
+
+    .btn-gradient {
+      padding: 0.6rem 1.2rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .card {
+      border-radius: 0;
+      margin: 0 auto;
+      min-height: 60vh;
+    }
+
+    .card-header {
+      border-radius: 0;
+    }
+
+    .card:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-gradient {
+      padding: 0.5rem 1rem;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm_password');
+    const registerButton = document.getElementById('registerButton');
+
+    function checkInputs() {
+        const nameValue = nameInput.value.trim();
+        const emailValue = emailInput.value.trim();
+        const passwordValue = passwordInput.value.trim();
+        const confirmPasswordValue = confirmPasswordInput.value.trim();
+        
+        if (nameValue && emailValue && passwordValue && confirmPasswordValue) {
+            registerButton.style.display = 'block';
+        } else {
+            registerButton.style.display = 'none';
+        }
+    }
+
+    nameInput.addEventListener('input', checkInputs);
+    emailInput.addEventListener('input', checkInputs);
+    passwordInput.addEventListener('input', checkInputs);
+    confirmPasswordInput.addEventListener('input', checkInputs);
+});
+</script>
+{% endblock %}
