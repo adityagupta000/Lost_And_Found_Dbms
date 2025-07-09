@@ -197,11 +197,14 @@ The system uses a well-structured MySQL database with the following key tables:
 - **Indexing** - Optimized query performance
 
 ## 📱 Screenshots
-- **Register
-- 
-- **Login
+- Register
+![image alt](https://github.com/adityagupta000/Lost_And_Found_Dbms/blob/920ad653d0447d985e2882857dd9f86a49977dca/db_lab/2.png)
+- Login
 ![image alt](https://github.com/adityagupta000/Lost_And_Found_Dbms/blob/main/db_lab/1.png?raw=true)
-
+- User Interface
+![image alt](https://github.com/adityagupta000/Lost_And_Found_Dbms/blob/920ad653d0447d985e2882857dd9f86a49977dca/db_lab/3.png)
+- Item Registration
+![image alt](https://github.com/adityagupta000/Lost_And_Found_Dbms/blob/920ad653d0447d985e2882857dd9f86a49977dca/db_lab/4.png)
 <div align="center">
 Made with ❤️ for better organization management
 </div>
