@@ -198,18 +198,7 @@ The system uses a well-structured MySQL database with the following key tables:
 
 ## 📱 Screenshots
 
-*Coming soon - Screenshots will be added to showcase the user interface*
+<div align="center">![1](https://github.com/user-attachments/assets/ea82db55-63e2-49db-a5f2-e5373bd673a5)
 
-## 🤝 Contributing
-
-We welcome contributions to improve the Lost and Found Management System!
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<div align="center">
 Made with ❤️ for better organization management
 </div>
