@@ -6,7 +6,6 @@
 ![Flask](https://img.shields.io/badge/Flask-2.0+-green.svg)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0+-orange.svg)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.0+-purple.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 **A comprehensive web-based platform for managing lost and found items within organizations**
 
@@ -210,19 +209,6 @@ We welcome contributions to improve the Lost and Found Management System!
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Bootstrap team for the responsive framework
-- Flask community for the excellent web framework
-- MySQL team for the robust database system
-- All contributors who helped improve this project
-
----
 
 <div align="center">
 Made with ❤️ for better organization management
