@@ -9,7 +9,7 @@
 
 **A comprehensive web-based platform for managing lost and found items within organizations**
 
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Tech Stack](#-tech-stack) • [Contributing](#-contributing)
+[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Tech Stack](#-tech-stack) 
 
 </div>
 
