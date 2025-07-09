@@ -198,7 +198,6 @@ The system uses a well-structured MySQL database with the following key tables:
 
 ## 📱 Screenshots
 
-<div align="center">![1](https://github.com/user-attachments/assets/ea82db55-63e2-49db-a5f2-e5373bd673a5)
-
+<div align="center">
 Made with ❤️ for better organization management
 </div>
